@@ -21,7 +21,7 @@ function printOrderTotal(responseString) {
  **/
 
 /**
- * printOrderTotal занимается только выводом данных
+ * printToConsole занимается только выводом данных
  * logger принимаем как аргумент функции, чтобы можно было легко подменять logger по мере необходимости
  **/
 function printToConsole(logger, message) {
@@ -33,8 +33,8 @@ function printToConsole(logger, message) {
  * item.price = undefined - здесь ошибка, внутри условия присваивание, хотя явно предполагалось сравнение. меняем на ===
  * переменную orderSubtotal можно удалить
  */
-function calculateOrderTotal(items) {
-    return items.reduce((acc, current) => current.price === undefined ? 0 : current.price, 0);
+function calculateOrderTotal(orders) {
+    return orders.reduce((acc, current) => current.price === undefined ? 0 : current.price, 0);
 }
 
 /**
@@ -48,7 +48,8 @@ async function makeRequest(url, method='GET') {
     try {
         return JSON.parse(response);
     } catch (e) {
-        // здесь нужно как-то обработать ошибку, например, показать какое-то уведомление пользователю
+        // здесь нужно как-то обработать ошибку, например, выбросить какое-то специальное исключение, которое будет
+        // ловить кто-то выше по коду
         return [];
     }
 }
